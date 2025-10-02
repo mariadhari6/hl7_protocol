@@ -1,0 +1,592 @@
+{
+  "Header": {
+    "code": "MSH",
+    "fields": [
+      {
+        "Record type": "MSH"
+      },
+      {
+        "Encoding Characters": "^~\\&"
+      },
+      {
+        "Sending Application": ""
+      },
+      {
+        "Sending Facility": ""
+      },
+      {
+        "Receiving Application": ""
+      },
+      {
+        "Receiving Facility": ""
+      },
+      {
+        "Date/Time of Message": ""
+      },
+      {
+        "Security": ""
+      },
+      {
+        "Message Type": [
+          {
+            "Observation Type": ""
+          },
+          {
+            "Trigger Event": ""
+          }
+        ]
+      },
+      {
+        "Message Control ID": ""
+      },
+      {
+        "Processing ID": "P"
+      },
+      {
+        "Version ID": ""
+      },
+      {
+        "Sequence Number": ""
+      },
+      {
+        "Continuation Pointer": ""
+      },
+      {
+        "Accept Acknowledgment Type": ""
+      },
+      {
+        "Application Acknowledgment Type": ""
+      },
+      {
+        "Country Code": ""
+      },
+      {
+        "Character Set": ""
+      },
+      {
+        "Principal Language Of Message": ""
+      },
+      {
+        "Alternate Character Set Handling Scheme": ""
+      },
+      {
+        "[NONE]": ""
+      }
+    ]
+  },
+  "Message Acknowledgment": {
+    "code": "MSA",
+    "fields": [
+      {
+        "Record type": "MSA"
+      },
+      {
+        "Acknowledgment Code": ""
+      },
+      {
+        "Message Control ID": ""
+      },
+      {
+        "Text Message": ""
+      },
+      {
+        "Expected Sequence Number": ""
+      },
+      {
+        "Delayed Acknowledgment Type": ""
+      },
+      {
+        "Error Condition": ""
+      }
+    ]
+  },
+  "Patient Identification": {
+    "code": "PID",
+    "fields": [
+      {
+        "Record type": "PID"
+      },
+      {
+        "Set ID": ""
+      },
+      {
+        "Patient ID": ""
+      },
+      {
+        "Patient Identifier List": ""
+      },
+      {
+        "Alternate Patient ID": ""
+      },
+      {
+        "Patient Name": ""
+      },
+      {
+        "Mother‘s Maiden Name": ""
+      },
+      {
+        "Date/Time of Birth": ""
+      },
+      {
+        "Sex": ""
+      },
+      {
+        "Patient Alias": ""
+      },
+      {
+        "Race": ""
+      },
+      {
+        "Patient Address": ""
+      },
+      {
+        "County Code": ""
+      },
+      {
+        "Phone Number Home": ""
+      },
+      {
+        "Phone Number Business": ""
+      },
+      {
+        "Primary Language": ""
+      },
+      {
+        "Marital Status": ""
+      },
+      {
+        "Religion": ""
+      },
+      {
+        "Patient Account Number": ""
+      },
+      {
+        "SSN Patient Number": ""
+      },
+      {
+        "Patient Driver's License Number": ""
+      },
+      {
+        "Mother's Identifier": ""
+      },
+      {
+        "Ethnic Group": ""
+      },
+      {
+        "Birth Place": ""
+      },
+      {
+        "Multiple Birth Indicator": ""
+      },
+      {
+        "Citizenship": ""
+      },
+      {
+        "Veterans Military Status": ""
+      },
+      {
+        "Nationality": ""
+      },
+      {
+        "Patient Death Date and Time": ""
+      },
+      {
+        "Patient Death Indicator": ""
+      }
+    ]
+  },
+  "Observation Request": {
+    "code": "OBR",
+    "fields": [
+      {
+        "Record type": "OBR"
+      },
+      {
+        "Set ID": ""
+      },
+      {
+        "Placer Order Number": ""
+      },
+      {
+        "Filler Order Number": ""
+      },
+      {
+        "Universal Service ID": [
+          {
+            "Manufacture": ""
+          },
+          {
+            "Machine type": ""
+          }
+        ]
+      },
+      {
+        "Priority": ""
+      },
+      {
+        "Requested Date/time": ""
+      },
+      {
+        "Observation Date/Time": ""
+      },
+      {
+        "Observation End Date/Time": ""
+      },
+      {
+        "Collection Volume": ""
+      },
+      {
+        "Collector Identifier": [
+          {
+            "Sample Disk No.": ""
+          },
+          {
+            "Sample Cup No.": ""
+          }
+        ]
+      },
+      {
+        "Specimen Action Code": ""
+      },
+      {
+        "Danger Code": ""
+      },
+      {
+        "Relevant Clinical Info": ""
+      },
+      {
+        "Specimen Received Date/Time": ""
+      },
+      {
+        "Specimen Source": ""
+      },
+      {
+        "Ordering Provider": ""
+      },
+      {
+        "Ordering Provider": ""
+      },
+      {
+        "Placer Field 1": ""
+      },
+      {
+        "Placer Field 2": ""
+      },
+      {
+        "Filler Field 1": ""
+      },
+      {
+        "Filler Field 2": ""
+      },
+      {
+        "Result Rpt/Status Change - Date/Time": ""
+      },
+      {
+        "Charge to Practice": ""
+      },
+      {
+        "Diagnostic Serv Sect ID": ""
+      },
+      {
+        "Result Status": ""
+      },
+      {
+        "Parent Result": ""
+      },
+      {
+        "Quantity/Timing": ""
+      },
+      {
+        "Result Copies To": ""
+      },
+      {
+        "Parent": ""
+      },
+      {
+        "Transportation Mode": ""
+      },
+      {
+        "Reason for Study": ""
+      },
+      {
+        "Principal Result Interpreter": ""
+      },
+      {
+        "Assistant Result Interpreter": ""
+      },
+      {
+        "Technician": ""
+      },
+      {
+        "Transcriptionist": ""
+      },
+      {
+        "Scheduled Date/Time": ""
+      },
+      {
+        "Number of Sample Containers": ""
+      },
+      {
+        "Transport Logistics of Collected Sample": ""
+      },
+      {
+        "Collector‘s Comment": ""
+      },
+      {
+        "Transport Arrangement Responsibility": ""
+      },
+      {
+        "Transport Arrangement Responsibility": ""
+      },
+      {
+        "Transport Arranged": ""
+      },
+      {
+        "Escort Required": ""
+      },
+      {
+        "Planned Patient Transport Comment": ""
+      },
+      {
+        "Ordering Facility Name": ""
+      },
+      {
+        "Ordering Facility Address": ""
+      },
+      {
+        "Ordering Facility Phone Number": ""
+      },
+      {
+        "Ordering Provider Address": ""
+      }
+    ]
+  },
+  "Observation": {
+    "code": "OBX",
+    "fields": [
+      {
+        "Record type": "OBX"
+      },
+      {
+        "Set ID": ""
+      },
+      {
+        "Value Type": ""
+      },
+      {
+        "Observation Identifier": ""
+      },
+      {
+        "Observation Sub-ID": ""
+      },
+      {
+        "Observation Value": ""
+      },
+      {
+        "Units": ""
+      },
+      {
+        "References Range": ""
+      },
+      {
+        "Abnormal Flags": ""
+      },
+      {
+        "Probability": ""
+      },
+      {
+        "Nature of Abnormal Test": ""
+      },
+      {
+        "Observe Result Status": ""
+      },
+      {
+        "Date Last Observe Normal Values": ""
+      },
+      {
+        "User Defined Access Checks": ""
+      },
+      {
+        "Date/Time of the Observation": ""
+      },
+      {
+        "Producer's ID": ""
+      },
+      {
+        "Responsible Observer": ""
+      },
+      {
+        "Observation Method": ""
+      },
+      {
+        "Result Flag": ""
+      }
+    ]
+  },
+  "Query Definition": {
+    "code": "QRD",
+    "fields": [
+      {
+        "Record type": "QRD"
+      },
+      {
+        "Query Date/Time": ""
+      },
+      {
+        "Query Format Code": ""
+      },
+      {
+        "Query Priority": ""
+      },
+      {
+        "Query ID": ""
+      },
+      {
+        "Deferred Response Type": ""
+      },
+      {
+        "Deferred Response Date/Time": ""
+      },
+      {
+        "Quantity Limited Request": ""
+      },
+      {
+        "Who Subject Filter": ""
+      },
+      {
+        "What Subject Filter": ""
+      },
+      {
+        "What Department Data Code": ""
+      },
+      {
+        "What Data Code Value Qual": ""
+      },
+      {
+        "Query Results Level": ""
+      }
+    ]
+  },
+  "Query Filter": {
+    "code": "QRF",
+    "fields": [
+      {
+        "Record type": "QRF"
+      },
+      {
+        "Where Subject Filter": ""
+      },
+      {
+        "When Data Start Date/Time": ""
+      },
+      {
+        "What User Qualifier": ""
+      },
+      {
+        "Other QRY Subject Filter": ""
+      },
+      {
+        "Which Date/Time Qualifier": ""
+      },
+      {
+        "Which Date/Time Status Qualifier": ""
+      },
+      {
+        "Date/Time Selection Qualifier": ""
+      },
+      {
+        "When Quantity/Timing Qualifier": ""
+      }
+    ]
+  },
+  "Error": {
+    "code": "ERR",
+    "fields": [
+      {
+        "Record type": "ERR"
+      },
+      {
+        "Error Code and Location": ""
+      }
+    ]
+  },
+  "Query Acknowledgment": {
+    "code": "QAK",
+    "fields": [
+      {
+        "Record type": "QAK"
+      },
+      {
+        "Query Tag": ""
+      },
+      {
+        "Query Response Status": ""
+      }
+    ]
+  },
+  "Display Data": {
+    "code": "DSP",
+    "fields": [
+      {
+        "Record type": "DSP"
+      },
+      {
+        "Set ID": ""
+      },
+      {
+        "Display Level": ""
+      },
+      {
+        "Data Line": {
+          "Admission Number": "",
+          "Bed Number": "",
+          "Patient Name": "",
+          "Date of Birth": "",
+          "Sex": "",
+          "Patient Alias": "",
+          "Race": "",
+          "Patient Address": "",
+          "County Code": "",
+          "Home Phone Number": "",
+          "Primary Language": "",
+          "Marital Status": "",
+          "Religion": "",
+          "Patient Account Number": "",
+          "Social Security Number": "",
+          "Driver License Number": "",
+          "Ethnic Group": "",
+          "Birth Place": "",
+          "Nationality": "",
+          "Bar Code": "",
+          "Sample ID": "",
+          "Sample Time": "",
+          "STAT or not": "",
+          "Collection Volume": "",
+          "Sample Type": "",
+          "Fetch Doctor": "",
+          "Fetch Department": "",
+          "Sample Test": [
+            {
+              "Test ID": ""
+            },
+            {
+              "Test Name": ""
+            },
+            {
+              "Unit": ""
+            },
+            {
+              "Normal Range": ""
+            }
+          ]
+        }
+      },
+      {
+        "Logical Break Point": ""
+      },
+      {
+        "Result ID": ""
+      }
+    ]
+  }
+}

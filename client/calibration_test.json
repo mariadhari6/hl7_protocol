@@ -1,0 +1,61 @@
+[
+  {
+    "Header": {
+      "Sending Application": "Mindray",
+      "Sending Facility": "BS-200",
+      "Date/Time of Message": "20250927070153",
+      "Message Type": {
+        "Observation Type": "ORU",
+        "Trigger Event": "R01"
+      },
+      "Message Control ID": "120",
+      "Version ID": "2.3.1",
+      "Application Acknowledgment Type": "0",
+      "Character Set": "ASCII"
+    },
+    "Patient Identification": [
+      {
+        "Patient Name": "MORGAN"
+      }
+    ],
+    "Observation Request": [
+      {
+        "Placer Order Number": "2509220011",
+        "Filler Order Number": "2",
+        "Universal Service ID": {
+          "Manufacture": "Mindray",
+          "Machine type": "BS-200"
+        },
+        "Priority": "N",
+        "Requested Date/time": "20250927065230",
+        "Specimen Source": "Serum"
+      }
+    ],
+    "Observation": [
+      {
+        "Value Type": "NM",
+        "Observation Identifier": "16",
+        "Observation Sub-ID": "SGPT",
+        "Observation Value": "34.131671",
+        "Units": "U/L",
+        "References Range": "-",
+        "Abnormal Flags": "Normal",
+        "Observe Result Status": "F",
+        "User Defined Access Checks": "34.131671",
+        "Date/Time of the Observation": "20250927065230"
+      },
+      {
+        "Value Type": "NM",
+        "Observation Identifier": "16",
+        "Observation Sub-ID": "SGPT",
+        "Observation Value": "34.131671",
+        "Units": "U/L",
+        "References Range": "-",
+        "Abnormal Flags": "Normal",
+        "Observe Result Status": "F",
+        "User Defined Access Checks": "34.131671",
+        "Date/Time of the Observation": "20250927065230"
+      }
+    ]
+  }
+]
