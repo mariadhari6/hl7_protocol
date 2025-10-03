@@ -39,7 +39,7 @@ public class Client
     string text = Encoding.Latin1.GetString(packet);
     Log.Information(text.Replace("\r", "<CR>").Replace(((char)FS).ToString(), "<FS>").Replace(((char)VT).ToString(), "<VT>"));
   }
-  private static JObject ParseContentText(JArray structure, string line, string sep = "|")
+  private static JObject ParseContentText(JArray structure, string line, string sep = "|", string sequence = "")
   {
     var obj = new JObject();
     string[] tokens = line.Split(sep);
@@ -84,7 +84,20 @@ public class Client
         string childLine = index < tokens.Length ? tokens[index] : "";
         index++;
 
-        JObject childObj = ParseContentText(new JArray(fieldDef), childLine, "^");
+        JArray childArr = new JArray(fieldDef);
+        int idx = Int32.Parse(sequence) - 1;
+
+
+        var childField = (JObject)fieldDef;
+
+        int lastIndex = childField.Properties().Count() - 1;
+
+
+        var property = childField.Properties().ElementAtOrDefault(idx < lastIndex ? idx : lastIndex);
+        var filtered = new JObject { [property!.Name] = property.Value };
+        childArr[0] = filtered;
+
+        JObject childObj = ParseContentText(childArr, childLine, "^", sequence: sequence);
         obj[key] = childObj;
       }
     }
@@ -103,7 +116,6 @@ public class Client
 
   private static string GetContentText(JArray structure, dynamic data, string sep = "|", string sequence = "1")
   {
-
     var listText = new List<string>();
 
     foreach (var item in structure)
@@ -111,10 +123,8 @@ public class Client
       JObject itemObj = (JObject)item;
       List<string> keys = itemObj.Properties().Select(p => p.Name).ToList();
 
-      // we only use the first key in this structure
       string key = keys[0];
       JToken tokenNode = itemObj[key]!;
-
       string token = "";
 
       if (tokenNode.Type == JTokenType.String ||
@@ -122,50 +132,80 @@ public class Client
           tokenNode.Type == JTokenType.Boolean ||
           tokenNode.Type == JTokenType.Float)
       {
-        // JValue
         token = tokenNode?.ToString() ?? "";
         if (string.IsNullOrEmpty(token))
-        {
-          // fallback ke data
           token = data[key]?.ToString() ?? "";
-        }
       }
       else if (tokenNode.Type == JTokenType.Array)
       {
-        // recursive call for nested structure
         var structureChild = (JArray)itemObj[key]!;
         var dataChild = data[key];
-        JToken tokenChild = dataChild;
-
-        if (dataChild != null)
+        if (dataChild != null && dataChild.Type == JTokenType.Array)
         {
-          if (tokenChild.Type == JTokenType.Array)
+          List<string> tokenList = new();
+          foreach (var d in dataChild)
           {
-            List<string> tokenList = new();
-            for (int i = 0; i < ((JArray)dataChild).Count; i++)
-            {
-              tokenList.Add(GetContentText(structureChild, dataChild[i], sep: "^", sequence: sequence));
-            }
-            token = string.Join('\\', tokenList);
+            tokenList.Add(GetContentText(structureChild, d, sep: "^", sequence: sequence));
           }
-          else
-          {
-            token = GetContentText(structureChild, dataChild, sep: "^", sequence: sequence);
-          }
+          token = string.Join("\\", tokenList);
         }
       }
       else if (tokenNode.Type == JTokenType.Object)
       {
-        // nested JObject
-        token = GetContentText(new JArray(tokenNode), data[key], sep: "^", sequence: sequence);
+
+        var structureChild = (JObject)tokenNode;
+        var dataChild = data[key] as JObject;
+
+        if (dataChild != null)
+        {
+          int index = 1;
+          var lines = new List<string>();
+
+          foreach (var childProp in structureChild.Properties())
+          {
+            string childKey = childProp.Name;
+            var childNode = childProp.Value;
+
+            if (childKey == "Sample Test")
+            {
+              // khusus Sample Test → array jadi beberapa baris
+              var structureArr = (JArray)childNode;
+              var dataArr = dataChild[childKey];
+
+              if (dataArr != null && dataArr.Type == JTokenType.Array)
+              {
+                foreach (var d in dataArr)
+                {
+                  string testValue = GetContentText(structureArr, d, sep: "^", sequence: sequence);
+                  lines.Add($"DSP|{index}||{testValue}|||");
+                  index++;
+                }
+              }
+            }
+            else
+            {
+              string value = "";
+              if (childNode.Type == JTokenType.String)
+                value = dataChild[childKey]?.ToString() ?? "";
+              else if (childNode.Type == JTokenType.Object)
+                value = GetContentText(new JArray(childNode), dataChild[childKey], sep: "^", sequence: sequence);
+
+              lines.Add($"DSP|{index}||{value}|||");
+              index++;
+            }
+          }
+
+          // langsung return multiline string
+          return string.Join("\n", lines);
+        }
       }
+
       if (key == "Set ID")
       {
         token = sequence;
       }
       listText.Add(token);
     }
-
     return string.Join(sep, listText);
   }
   private static string GetHeaderText(JArray structure, dynamic data, string sep = "|")
@@ -263,14 +303,90 @@ public class Client
     }
     return string.Join("\n", lines);
   }
-
-
   private static string PacketToString(byte[] packet)
   {
     string rawText = Encoding.Latin1.GetString(packet.Skip(1).Take(packet.Length - 3).ToArray()).Replace("\r", "<CR>").Replace(((char)FS).ToString(), "<FS>").Replace(((char)VT).ToString(), "<VT>");
     string[] lines = rawText.Split("<CR>").Where(s => s != "").ToArray();
 
     return string.Join("\n", lines);
+  }
+
+  private static JObject CreateResponseHeader(JObject receivedData, string observation_type = "ACK")
+  {
+    JObject messageHeader = (JObject)receivedData!["Header"]!.DeepClone();
+    messageHeader["Message Type"]!["Observation Type"] = observation_type;
+    messageHeader["Receiving Application"] = messageHeader["Sending Application"];
+    messageHeader["Receiving Facility"] = messageHeader["Sending Facility"];
+    messageHeader["Date/Time of Message"] = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+    messageHeader.Remove("Sending Application");
+    messageHeader.Remove("Sending Facility");
+    return messageHeader;
+  }
+
+  private static void HandleProcessData(JObject receivedData, NetworkStream stream)
+  {
+
+    bool isAckResponse = receivedData!["Header"]!["Message Type"]!["Observation Type"]!.ToString() == "ACK";
+    bool isQckResponse = receivedData!["Header"]!["Message Type"]!["Observation Type"]!.ToString() == "QCK";
+    bool isDisplayResponse = receivedData!["Header"]!["Message Type"]!["Observation Type"]!.ToString() == "DSR";
+    if (isAckResponse)
+    {
+      if (receivedData!["Message Acknowledgment"]!["Acknowledgment Code"]!.ToString() == "AA") // if the previous message was accepted without error
+      {
+        Log.Information("Get Query Data");
+
+        string queryString = File.ReadAllText("query_data.json");
+        if (string.IsNullOrEmpty(queryString))
+        {
+          Log.Fatal("Failed to read query data json");
+          return;
+        }
+        JArray? queryData = JsonConvert.DeserializeObject(queryString) as JArray;
+        Log.Information(queryData!.ToString(Formatting.Indented));
+        string text = ConvertJSONToText((JObject)STRUCT!.DeepClone(), (JObject)queryData![0]);
+        byte[] queryBytes = GetBytes(text);
+        stream.Write(queryBytes);
+        Log.Information("==================== Query Data ====================\n" + text);
+      }
+    }
+    else if (isQckResponse)
+    {
+
+    }
+    else if (isDisplayResponse)
+    {
+      // Send ack to server
+      JObject messageHeader = CreateResponseHeader(receivedData);
+
+      JObject msa = new JObject
+      {
+        {"Record type", "MSA"},
+        {"Acknowledgment Code", "AA"}, // accepted for default
+        {"Message Control ID", messageHeader["Message Control ID"]},
+        {"Text Message", "Message accepted"},
+        {"Error Condition", "0"}
+      };
+      JObject err = new JObject
+      {
+        {"Record type", "ERR"},
+        {"Error Code and Location", "0"}
+      };
+      JObject response = new JObject
+      {
+        {"Header", messageHeader},
+        {"Message Acknowledgment", msa},
+        {"Error", err}
+      };
+      SendResponse(response, stream, "ACK From DSR");
+    }
+  }
+  private static void SendResponse(JObject response, NetworkStream stream, string information = "Response")
+  {
+    string responseText = ConvertJSONToText((JObject)STRUCT!.DeepClone(), response);
+    byte[] responseBytes = GetBytes(responseText);
+    stream.Write(responseBytes);
+    Log.Information($"=========== {information} ===========\n" + responseText);
   }
   private static void HandleConnection(NetworkStream stream)
   {
@@ -283,16 +399,23 @@ public class Client
       while ((byteCount = stream.Read(buffer, 0, buffer.Length)) > 0)
       {
         incoming.AddRange(buffer.Take(byteCount));
-        if (incoming.Contains(FS))
+        // if (incoming.Contains(FS))
+        // {
+        //   break;
+        // }
+        while (incoming.Contains(FS))
         {
-          break;
+          int fsIndex = incoming.IndexOf(FS);
+          byte[] packet = incoming.Take(fsIndex + 2).ToArray();
+          incoming.RemoveRange(0, fsIndex + 2);
+
+          string message = PacketToString(packet);
+          Log.Information("Message Accepted:\n" + message);
+          JObject? receivedData = ClearJObjectData(ConvertTextToJSON(message)!);
+
+          HandleProcessData(receivedData, stream);
         }
       }
-      string message = PacketToString(incoming.ToArray());
-      Log.Information(message);
-      JObject? receivedData = ClearJObjectData(ConvertTextToJSON(message)!);
-      Log.Information(receivedData.ToString(Formatting.Indented));
-
     }
     catch (Exception e)
     {
@@ -352,12 +475,13 @@ public class Client
     foreach (var (value, index) in lines.Select((value, index) => (value, index)))
     {
       string recordType = value[..3].ToString();
+
       JArray? structure = STRUCT!.Properties()
                                  .Where(p => p.Value["code"] != null && p?.Value?["code"]?.ToString() == recordType)
                                  .Select(p => p.Value["fields"])
                                  .FirstOrDefault() as JArray;
 
-      result.Add(ParseContentText(structure!, value));
+      result.Add(ParseContentText(structure!, value, sequence: value.Split("|")[1]));
     }
 
     var recordTypes = result.Select(p => p["Record type"]?.ToString()).Where(v => !string.IsNullOrEmpty(v)).Distinct().ToList();
@@ -384,7 +508,6 @@ public class Client
     }
     return record;
   }
-
   public static void Main()
   {
     try
@@ -406,7 +529,6 @@ public class Client
       JArray? data = JsonConvert.DeserializeObject(dataString) as JArray;
 
       TEXT = ConvertJSONToText((JObject)STRUCT!.DeepClone(), (JObject)data![0]);
-      Console.WriteLine(TEXT);
 
       string TCP_HOST = Environment.GetEnvironmentVariable("TCP_HOST") ?? "127.0.0.1";
       int PORT = int.Parse(Environment.GetEnvironmentVariable("TCP_PORT") ?? "5000");

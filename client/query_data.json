@@ -1,0 +1,40 @@
+[
+  {
+    "Header": {
+      "Sending Application": "Mindray",
+      "Sending Facility": "BS-200",
+      "Date/Time of Message": "20250927070153",
+      "Message Type": {
+        "Observation Type": "QRY",
+        "Trigger Event": "Q02"
+      },
+      "Message Control ID": "120",
+      "Version ID": "2.3.1",
+      "Application Acknowledgment Type": "0",
+      "Character Set": "ASCII"
+    },
+    "Query Definition": {
+      "Query Date/Time": "20250927070153",
+      "Query Format Code": "R",
+      "Query Priority": "D",
+      "Query ID": "1",
+      "Quantity Limited Request": "RD",
+      "Who Subject Filter": "0019",
+      "What Subject Filter": "OTH",
+      "What Department Data Code": "",
+      "What Data Code Value Qual": "",
+      "Query Results Level": "T"
+    },
+    "Query Filter": {
+      "Where Subject Filter": "Example Product",
+      "When Data Start Date/Time": "20250927070153",
+      "When Data End Date/Time": "20251001140936",
+      "What User Qualifier": "",
+      "Other QRY Subject Filter": "",
+      "Which Date/Time Qualifier": "RCT",
+      "Which Date/Time Status Qualifier": "COR",
+      "Date/Time Selection Qualifier": "ALL",
+      "When Quantity/Timing Qualifier": ""
+    }
+  }
+]

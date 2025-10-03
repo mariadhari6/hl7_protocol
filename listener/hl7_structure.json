@@ -97,6 +97,9 @@
       },
       {
         "Error Condition": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -192,6 +195,9 @@
       },
       {
         "Patient Death Indicator": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -358,6 +364,9 @@
       },
       {
         "Ordering Provider Address": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -420,6 +429,9 @@
       },
       {
         "Result Flag": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -464,6 +476,9 @@
       },
       {
         "Query Results Level": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -478,6 +493,9 @@
       },
       {
         "When Data Start Date/Time": ""
+      },
+      {
+        "When Data End Date/Time": ""
       },
       {
         "What User Qualifier": ""
@@ -496,6 +514,9 @@
       },
       {
         "When Quantity/Timing Qualifier": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -507,6 +528,9 @@
       },
       {
         "Error Code and Location": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -521,6 +545,9 @@
       },
       {
         "Query Response Status": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   },
@@ -537,13 +564,73 @@
         "Display Level": ""
       },
       {
-        "Data Line": ""
+        "Data Line": {
+          "Admission Number": "",
+          "Bed Number": "",
+          "Patient Name": "",
+          "Date of Birth": "",
+          "Sex": "",
+          "Patient Alias": "",
+          "Race": "",
+          "Patient Address": "",
+          "County Code": "",
+          "Home Phone Number": "",
+          "Business Phone Number": "",
+          "Primary Language": "",
+          "Marital Status": "",
+          "Religion": "",
+          "Patient Account Number": "",
+          "Social Security Number": "",
+          "Driver License Number": "",
+          "Ethnic Group": "",
+          "Birth Place": "",
+          "Nationality": "",
+          "Bar Code": "",
+          "Sample ID": "",
+          "Sample Time": "",
+          "STAT or not": "",
+          "Collection Volume": "",
+          "Sample Type": "",
+          "Fetch Doctor": "",
+          "Fetch Department": "",
+          "Sample Test": [
+            {
+              "Test ID": ""
+            },
+            {
+              "Test Name": ""
+            },
+            {
+              "Unit": ""
+            },
+            {
+              "Normal Range": ""
+            }
+          ]
+        }
       },
       {
         "Logical Break Point": ""
       },
       {
         "Result ID": ""
+      },
+      {
+        "[NONE]": ""
+      }
+    ]
+  },
+  "Continuation Pointer": {
+    "code": "DSC",
+    "fields": [
+      {
+        "Record type": "DSC"
+      },
+      {
+        "Continuation pointer": ""
+      },
+      {
+        "[NONE]": ""
       }
     ]
   }

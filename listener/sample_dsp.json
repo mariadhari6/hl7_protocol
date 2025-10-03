@@ -1,0 +1,90 @@
+[
+  {
+    "Sample No.": "0019",
+    "Data Line": {
+      "Admission Number": "1212",
+      "Bed Number": "27",
+      "Patient Name": "Tommy",
+      "Date of Birth": "19620824000000",
+      "Sex": "M",
+      "Patient Alias": "O",
+      "Race": "O",
+      "Patient Address": "",
+      "County Code": "",
+      "Home Phone Number": "",
+      "Business Phone Number": "",
+      "Primary Language": "",
+      "Marital Status": "",
+      "Religion": "",
+      "Patient Account Number": "outpatient",
+      "Social Security Number": "",
+      "Driver License Number": "own",
+      "Ethnic Group": "",
+      "Birth Place": "",
+      "Nationality": "",
+      "Bar Code": "own",
+      "Sample ID": "3",
+      "Sample Time": "20251001140936",
+      "STAT or not": "N",
+      "Collection Volume": "",
+      "Sample Type": "serum",
+      "Fetch Doctor": "Mary",
+      "Fetch Department": "Dept1",
+      "Sample Test": [
+        {
+          "Test ID": "1"
+        },
+        {
+          "Test ID": "2"
+        },
+        {
+          "Test ID": "5"
+        }
+      ]
+    }
+  },
+  {
+    "Sample No.": "0020",
+    "Data Line": {
+      "Admission Number": "1212",
+      "Bed Number": "27",
+      "Patient Name": "Thomas",
+      "Date of Birth": "19720824000000",
+      "Sex": "M",
+      "Patient Alias": "O",
+      "Race": "O",
+      "Patient Address": "",
+      "County Code": "",
+      "Home Phone Number": "",
+      "Business Phone Number": "",
+      "Primary Language": "",
+      "Marital Status": "",
+      "Religion": "",
+      "Patient Account Number": "outpatient",
+      "Social Security Number": "",
+      "Driver License Number": "own",
+      "Ethnic Group": "",
+      "Birth Place": "",
+      "Nationality": "",
+      "Bar Code": "own",
+      "Sample ID": "3",
+      "Sample Time": "20251001140936",
+      "STAT or not": "N",
+      "Collection Volume": "",
+      "Sample Type": "serum",
+      "Fetch Doctor": "Mary",
+      "Fetch Department": "Dept1",
+      "Sample Test": [
+        {
+          "Test ID": "1"
+        },
+        {
+          "Test ID": "2"
+        },
+        {
+          "Test ID": "5"
+        }
+      ]
+    }
+  }
+]
